@@ -13,6 +13,9 @@
   <a href="https://github.com/lyzhenko/doctranslate/actions/workflows/ci.yml">
     <img src="https://github.com/lyzhenko/doctranslate/actions/workflows/ci.yml/badge.svg" alt="CI">
   </a>
+  <a href="https://github.com/lyzhenko/doctranslate/releases/latest">
+    <img src="https://img.shields.io/github/v/release/lyzhenko/doctranslate?label=release" alt="Release">
+  </a>
   <a href="LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT">
   </a>
@@ -48,7 +51,14 @@
 
 ### Из VSIX
 
-Соберите пакет:
+Готовая сборка: **[doc-translate-0.1.1.vsix](https://github.com/lyzhenko/doctranslate/releases/download/v0.1.1/doc-translate-0.1.1.vsix)**
+(все версии — в [Releases](https://github.com/lyzhenko/doctranslate/releases)).
+
+```powershell
+code --install-extension .\doc-translate-0.1.1.vsix
+```
+
+Или соберите сами:
 
 ```powershell
 git clone https://github.com/lyzhenko/doctranslate.git
@@ -57,9 +67,6 @@ npm ci
 npm run package
 code --install-extension .\doc-translate-0.1.1.vsix
 ```
-
-Готовые сборки также публикуются в [Releases](https://github.com/lyzhenko/doctranslate/releases)
-при push тега `v*`.
 
 ### Из исходников (для разработки)
 
