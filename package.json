@@ -1,0 +1,134 @@
+{
+  "name": "doc-translate",
+  "displayName": "Doc Translate — перевод документации",
+  "description": "Переводит всплывающую подсказку с документацией символа на русский или другой язык через OpenAI-совместимый API. Оригинал остаётся на месте, перевод добавляется ниже.",
+  "version": "0.1.1",
+  "publisher": "lyzhenko",
+  "author": "Alexander Lyzhenko",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lyzhenko/doctranslate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lyzhenko/doctranslate/issues"
+  },
+  "homepage": "https://github.com/lyzhenko/doctranslate#readme",
+  "icon": "docs/icon.png",
+  "galleryBanner": {
+    "color": "#0d1117",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "translate",
+    "documentation",
+    "hover",
+    "translation",
+    "russian",
+    "deepseek",
+    "openai",
+    "jsdoc"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/src/extension.js",
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -w -p ./",
+    "test": "npm run compile && node --test out/test",
+    "e2e": "npm run compile && node out/scripts/e2e.js",
+    "package": "vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.0",
+    "@types/vscode": "^1.90.0",
+    "@vscode/vsce": "^4.1.1",
+    "typescript": "^5.9.3"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "docTranslate.toggle",
+        "title": "Включить или выключить перевод документации",
+        "category": "Doc Translate"
+      },
+      {
+        "command": "docTranslate.configure",
+        "title": "Настроить провайдера перевода",
+        "category": "Doc Translate"
+      },
+      {
+        "command": "docTranslate.setApiKey",
+        "title": "Установить API-ключ",
+        "category": "Doc Translate"
+      },
+      {
+        "command": "docTranslate.selectLanguage",
+        "title": "Выбрать язык перевода",
+        "category": "Doc Translate"
+      },
+      {
+        "command": "docTranslate.clearCache",
+        "title": "Очистить кэш переводов",
+        "category": "Doc Translate"
+      },
+      {
+        "command": "docTranslate.showLog",
+        "title": "Показать журнал",
+        "category": "Doc Translate"
+      }
+    ],
+    "configuration": {
+      "title": "Doc Translate",
+      "properties": {
+        "docTranslate.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Добавлять перевод в подсказку при наведении на символ."
+        },
+        "docTranslate.targetLanguage": {
+          "type": "string",
+          "default": "ru",
+          "description": "Код языка перевода: ru, en, de, fr, es, zh, ja и т. п."
+        },
+        "docTranslate.apiBaseUrl": {
+          "type": "string",
+          "default": "https://api.deepseek.com/v1",
+          "description": "Базовый URL OpenAI-совместимого API, например https://api.openai.com/v1 или http://localhost:11434/v1 для Ollama."
+        },
+        "docTranslate.model": {
+          "type": "string",
+          "default": "deepseek-chat",
+          "description": "Имя модели, например deepseek-chat, gpt-4o-mini или qwen2.5-coder:7b."
+        },
+        "docTranslate.apiKeyRequired": {
+          "type": "boolean",
+          "default": true,
+          "description": "Требовать API-ключ. Отключите для локальных серверов без авторизации (Ollama, LM Studio)."
+        },
+        "docTranslate.timeoutMs": {
+          "type": "number",
+          "default": 15000,
+          "minimum": 1000,
+          "maximum": 120000,
+          "description": "Таймаут одного запроса к API в миллисекундах."
+        },
+        "docTranslate.maxDocChars": {
+          "type": "number",
+          "default": 6000,
+          "minimum": 500,
+          "maximum": 60000,
+          "description": "Документация длиннее этого числа символов не переводится (чтобы не отправлять в API простыни)."
+        }
+      }
+    }
+  }
+}
