@@ -5,8 +5,6 @@ src/**
 test/**
 scripts/**
 CONTRIBUTING.md
-docs/banner.png
-docs/hover-demo.png
 out/test/**
 out/scripts/**
 out/*.html
