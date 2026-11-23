@@ -43,7 +43,7 @@
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -w -p ./",
-    "test": "npm run compile && node --test out/test",
+    "test": "npm run compile && node --test out/test/*.test.js",
     "e2e": "npm run compile && node out/scripts/e2e.js",
     "package": "vsce package --no-dependencies"
   },
