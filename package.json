@@ -2,7 +2,7 @@
   "name": "doc-translate",
   "displayName": "Doc Translate — перевод документации",
   "description": "Переводит всплывающую подсказку с документацией символа на русский или другой язык через OpenAI-совместимый API. Оригинал остаётся на месте, перевод добавляется ниже.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "publisher": "lyzhenko",
   "author": "Alexander Lyzhenko",
   "license": "MIT",

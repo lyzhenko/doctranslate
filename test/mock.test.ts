@@ -176,6 +176,19 @@ test('hover provider skips documentation already in the target language', async 
 
   assert.equal(hover, undefined);
   assert.equal(requestCount.value, 0);
+  assert.match(logs.join(' | '), /уже на языке «Русский»/);
+});
+
+test('hover provider translates Ukrainian documentation, not skipping it', async () => {
+  const requestCount = { value: 0 };
+  createProvider({ translation: 'не используется', apiKey: 'test-key', requestCount });
+  builtinMarkdown = 'Повертає останнє входження підрядка в рядок або -1, якщо його немає.';
+  nestedResult = 'not called';
+
+  const hover = await provider.provideHover(document, position, token);
+
+  assert.ok(hover, logs.join(' | '));
+  assert.equal(requestCount.value, 1);
 });
 
 test('hover provider offers to set a key when it is missing', async () => {

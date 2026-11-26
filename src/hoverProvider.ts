@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import type { TranslationSettings } from './config';
 import { readSettings } from './config';
 import { readHoverDocumentation } from './documentation';
-import { isMostlyInLanguage, languageDisplayName } from './language';
+import { detectLanguage, languageDisplayName } from './language';
 import { TranslationError } from './llm';
 import { countLetters, maskMarkdown } from './markdown';
 import type { DocumentationTranslator } from './translator';
@@ -64,7 +64,11 @@ export class DocumentationHoverProvider implements vscode.HoverProvider {
       if (countLetters(maskedText) < 3) {
         return undefined;
       }
-      if (isMostlyInLanguage(maskedText, settings.targetLanguage)) {
+      const guess = detectLanguage(maskedText);
+      if (guess && guess.code === settings.targetLanguage) {
+        this.log(
+          `Документация уже на языке «${languageDisplayName(guess.code)}» — перевод не нужен`,
+        );
         return undefined;
       }
       if (token.isCancellationRequested) {
